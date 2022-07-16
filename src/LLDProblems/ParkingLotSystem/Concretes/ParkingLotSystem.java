@@ -12,51 +12,49 @@ import java.util.Map;
 
 public class ParkingLotSystem {
 
-    private static ParkingLot parkingLot;
-    private static TicketCollection ticketCollection;
+  private static ParkingLot parkingLot;
+  private static TicketCollection ticketCollection;
 
-    public ParkingLotSystem(){
-      this.parkingLot=ParkingLot.getInstance();
-      this.ticketCollection=new TicketCollection();
+  public ParkingLotSystem() {
+    this.parkingLot = ParkingLot.getInstance();
+    this.ticketCollection = new TicketCollection();
+  }
+
+  public void addParkingSpotType(
+      String floorId, EnumParkingSlotType enumParkingSpotType, int count) {
+    if (parkingLot.getParkingFloorMap().containsKey(floorId)) {
+      ParkingFloor parkingFloor = parkingLot.getParkingFloorMap().get(floorId);
+      parkingFloor.addParkingSpotTypeCount(enumParkingSpotType, count);
+      initializeParkingSlot(parkingFloor);
+    } else {
+      ParkingFloor parkingFloor = new ParkingFloor();
+      parkingFloor.setId(floorId);
+      parkingFloor.addParkingSpotTypeCount(enumParkingSpotType, count);
+      initializeParkingSlot(parkingFloor);
+      parkingLot.addParkingFloor(parkingFloor);
     }
+  }
 
-    public void addParkingSpotType(String floorId, EnumParkingSlotType enumParkingSpotType, int count){
-        if(parkingLot.getParkingFloorMap().containsKey(floorId)){
-            ParkingFloor parkingFloor=parkingLot.getParkingFloorMap().get(floorId);
-            parkingFloor.addParkingSpotTypeCount(enumParkingSpotType,count);
-            initializeParkingSlot(parkingFloor);
-        }else{
-            ParkingFloor parkingFloor=new ParkingFloor();
-            parkingFloor.setId(floorId);
-            parkingFloor.addParkingSpotTypeCount(enumParkingSpotType,count);
-            initializeParkingSlot(parkingFloor);
-            parkingLot.addParkingFloor(parkingFloor);
-        }
-
+  private void initializeParkingSlot(ParkingFloor parkingFloor) {
+    Map<EnumParkingSlotType, Integer> enumParkingSpotTypeCountMap =
+        parkingFloor.getEnumParkingSpotTypeCountMap();
+    Map<EnumParkingSlotType, List<ParkingSlot>> enumParkingSpotTypeListMap =
+        parkingFloor.getEnumParkingSpotTypeListMap();
+    for (Map.Entry<EnumParkingSlotType, Integer> entry : enumParkingSpotTypeCountMap.entrySet()) {
+      List<ParkingSlot> parkingSlotList = new ArrayList<>();
+      for (int i = 0; i < entry.getValue(); i++) {
+        ParkingSlot parkingSlot = new ParkingSlot();
+        parkingSlot.setSlotId(String.valueOf(i + 1));
+        parkingSlot.setParkingFloorId(parkingFloor.getId());
+        parkingSlot.setEnumParkingSpotType(entry.getKey());
+        parkingSlotList.add(parkingSlot);
+      }
+      enumParkingSpotTypeListMap.put(entry.getKey(), parkingSlotList);
     }
+  }
 
-    private void initializeParkingSlot(ParkingFloor parkingFloor){
-        Map<EnumParkingSlotType,Integer>enumParkingSpotTypeCountMap=parkingFloor.getEnumParkingSpotTypeCountMap();
-        Map<EnumParkingSlotType, List<ParkingSlot>>enumParkingSpotTypeListMap=parkingFloor.getEnumParkingSpotTypeListMap();
-        for(Map.Entry<EnumParkingSlotType,Integer> entry : enumParkingSpotTypeCountMap.entrySet()){
-            List<ParkingSlot> parkingSlotList=new ArrayList<>();
-            for(int i=0;i<entry.getValue();i++){
-                ParkingSlot parkingSlot= new ParkingSlot();
-                parkingSlot.setSlotId(String.valueOf(i+1));
-                parkingSlot.setParkingFloorId(parkingFloor.getId());
-                parkingSlot.setEnumParkingSpotType(entry.getKey());
-                parkingSlotList.add(parkingSlot);
-            }
-            enumParkingSpotTypeListMap.put(entry.getKey(),parkingSlotList);
-        }
-
-
-    }
-
-
-//    public void addFloor(ParkingFloor parkingFloor){
-//        parkingLot.addParkingFloor(parkingFloor);
-//    }
-
+  //    public void addFloor(ParkingFloor parkingFloor){
+  //        parkingLot.addParkingFloor(parkingFloor);
+  //    }
 
 }

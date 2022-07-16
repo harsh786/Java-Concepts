@@ -5,6 +5,8 @@ import LLDProblems.BillSharingApp.Exceptions.BillSharingException;
 import LLDProblems.BillSharingApp.Interfaces.IBillSharingSplitService;
 import LLDProblems.BillSharingApp.Interfaces.IBillSharingUserService;
 import LLDProblems.BillSharingApp.SplitDetailsDto;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class BillSharingSplitService implements IBillSharingSplitService {
@@ -22,7 +24,7 @@ public class BillSharingSplitService implements IBillSharingSplitService {
      return paidAmount/splitUserCount;
     }
 
-    public void splitBillAmongUser(SplitDetailsDto splitDetailsDto, double splitAmount) throws BillSharingException {
+    public void splitBillAmongUser(@NotNull SplitDetailsDto splitDetailsDto, double splitAmount) throws BillSharingException {
         UserEntity billPaidByUserEntity= billSharingUserService.getUser(splitDetailsDto.getBillPaidByUser());
         billPaidByUserEntity.setPaid(splitDetailsDto.getPaidAmount());
         billPaidByUserEntity.setOwe(splitAmount);

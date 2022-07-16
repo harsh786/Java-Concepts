@@ -6,16 +6,13 @@ import LLDProblems.ParkingLotSystem.Entity.Vehicle;
 import LLDProblems.ParkingLotSystem.Interfaces.AbstractBaseParkingAllotStrategy;
 
 public class SimpleParkingAllotStategy extends AbstractBaseParkingAllotStrategy {
-    public SimpleParkingAllotStategy(){
+  public SimpleParkingAllotStategy() {}
 
-    }
-    public ParkingSlot findParkingSlot(ParkingLot parkingLot, Vehicle vehicle) {
-        return super.findParkingSlot(parkingLot,vehicle);
+  public ParkingSlot findParkingSlot(ParkingLot parkingLot, Vehicle vehicle) {
+    return super.findParkingSlot(parkingLot, vehicle);
+  }
 
-    }
-
-    public boolean isSlotAvailable(ParkingLot parkingLot, Vehicle vehicle) {
-          return super.findParkingSlot(parkingLot,vehicle)==null?false:true;
-
-    }
+  public boolean isSlotAvailable(ParkingLot parkingLot, Vehicle vehicle) {
+    return super.findParkingSlot(parkingLot, vehicle) == null ? false : true;
+  }
 }

@@ -1,0 +1,9 @@
+https://www.dynatrace.com/resources/ebooks/javabook/analyzing-java-memory/
+https://www.freecodecamp.org/news/garbage-collection-in-java-what-is-gc-and-how-it-works-in-the-jvm/
+https://stackify.com/what-is-java-garbage-collection/
+https://www.baeldung.com/jvm-garbage-collectors
+https://dzone.com/articles/jvm-architecture-explained
+https://medium.com/platform-engineer/understanding-jvm-architecture-22c0ddf09722
+https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/
+https://techvidvan.com/tutorials/java-virtual-machine/
+https://javabypatel.blogspot.com/search/label/Java?updated-max=2016-10-30T12%3A02%3A00-07%3A00&max-results=10#PageNo=8
