@@ -104,6 +104,17 @@ public class JavaConurrentPKGUtilities {
 	private void TransferMoney() {
 		BankAccount From=new BankAccount(1000);
 		BankAccount To=new BankAccount(1000);
+
+		new Thread(()->{boolean status=BankAccount.BankAmountTransferFromOneActToOther(From, To, 100);
+			if(status)
+			{
+				System.out.println("From act balance1:"+From.balance);
+				System.out.println("to act balance1:"+To.balance);
+			}
+			else
+			{
+				System.out.println("cant transfer money less balance1");
+			} }).start();
 		
 		new Thread(new Runnable() {
 			
